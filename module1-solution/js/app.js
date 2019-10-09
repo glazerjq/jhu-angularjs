@@ -10,17 +10,16 @@ function LunchCheckController($scope) {
 	$scope.checkIfTooMuch = function () {
 		if (!($scope.dishes)) {
 			$scope.output = "Please enter data first";
-			$scope.output_style = "text-danger border border-danger";
+			$scope.output_style = "red-text-border";
 		} else if ($scope.dishes.split(',').filter(x => x.trim() != "").length <= 3) {
 			$scope.output = "Enjoy!";
-			$scope.output_style = "text-success border border-success";
+			$scope.output_style = "green-text-border";
 		} else {
 			$scope.output = "Too much!";
-			$scope.output_style = "text-success border border-success";
+			$scope.output_style = "green-text-border";
 		}
 	}
 
-	$scope.outputStyle
 };
 
 })();

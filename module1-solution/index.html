@@ -4,6 +4,7 @@
     <title>Lunch Checker</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="styles/bootstrap.min.css">
+    <link rel="stylesheet" href="styles/styles.css">
     <style>
       .message { font-size: 1.3em; font-weight: bold; }
     </style>
@@ -22,8 +23,8 @@
          <div class="form-group">
              <button class="btn btn-default" ng-click="checkIfTooMuch()">Check If Too Much</button>
          </div>
-         <div class="form-group message {{output_style}}">
-           {{output}}
+         <div class="form-group message">
+             <span class="{{output_style}}">{{output}}</span>
          </div>
    </div>
 

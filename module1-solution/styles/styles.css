@@ -1,0 +1,11 @@
+.green-text-border {
+	border: 1px solid green;
+	color: green;
+	padding: 6px;
+}
+
+.red-text-border {
+	border: 1px solid red;
+	color: red;
+	padding: 6px;
+}
