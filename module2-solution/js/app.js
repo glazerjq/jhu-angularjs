@@ -5,9 +5,10 @@
 angular.module('ShoppingListCheckOff', [])
 .controller('ToBuyController', ToBuyController)
 .controller('AlreadyBoughtController', AlreadyBoughtController)
-.service('ShoppingListCheckOffService', ShoppingListCheckOffService);
+.service('ShoppingListCheckOffService', ShoppingListCheckOffService)
+.filter('angularCurrencyFilter', AngularCurrencyFilter);
 
-ToBuyController .$inject = ['ShoppingListCheckOffService'];
+ToBuyController.$inject = ['ShoppingListCheckOffService'];
 function ToBuyController (ShoppingListCheckOffService) {
 	var itemsToBuy = this;
 
@@ -17,7 +18,7 @@ function ToBuyController (ShoppingListCheckOffService) {
 	};
 };
 
-AlreadyBoughtController .$inject = ['ShoppingListCheckOffService'];
+AlreadyBoughtController.$inject = ['ShoppingListCheckOffService'];
 function AlreadyBoughtController (ShoppingListCheckOffService) {
 	var boughtItems = this;
 
@@ -28,11 +29,11 @@ function ShoppingListCheckOffService() {
 	var service = this;
 
 	var toBuyItems = [
-		{ name: "cookies", quantity: 10 },
-		{ name: "chips", quantity: 2 },
-		{ name: "coca cola", quantity: 5 },
-		{ name: "crackers", quantity: 9 },
-		{ name: "coffee", quantity: 1 }
+		{ name: "cookies", quantity: 10, pricePerItem: 1 },
+		{ name: "chips", quantity: 2, pricePerItem: 1.5 },
+		{ name: "coca cola", quantity: 5, pricePerItem: 1.25 },
+		{ name: "crackers", quantity: 9, pricePerItem: 0.5 },
+		{ name: "coffee", quantity: 1, pricePerItem: 3 }
 	];
 	var boughtItems = [];
 
@@ -48,6 +49,15 @@ function ShoppingListCheckOffService() {
 	service.getBoughtItems = function() { 
 		return boughtItems;
 	}
+}
+
+AngularCurrencyFilter.$inject = ['$filter'];
+function AngularCurrencyFilter($filter) {
+  return function (value) {
+    value = value || 0;
+    value = "$$" + $filter('currency')(value)
+    return value;
+  }
 }
 
 })();
