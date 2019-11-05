@@ -2,62 +2,36 @@
 (function() {
 'use strict';
 
-angular.module('ShoppingListCheckOff', [])
-.controller('ToBuyController', ToBuyController)
-.controller('AlreadyBoughtController', AlreadyBoughtController)
-.service('ShoppingListCheckOffService', ShoppingListCheckOffService)
-.filter('angularCurrencyFilter', AngularCurrencyFilter);
+angular.module('NarrowItDownApp', [])
+.controller('NarrowItDownController', NarrowItDownController)
+.service('MenuSearchService', MenuSearchService);
 
-ToBuyController.$inject = ['ShoppingListCheckOffService'];
-function ToBuyController (ShoppingListCheckOffService) {
-	var itemsToBuy = this;
+NarrowItDownController.$inject = ['MenuSearchService'];
+function NarrowItDownController (MenuSearchService) {
+	var narrowItDown = this;
+	narrowItDown.found = [];
 
-	itemsToBuy.items = ShoppingListCheckOffService.getItemsToBuy();
-	itemsToBuy.buyItem = function (index) {
-		ShoppingListCheckOffService.buyItem(index)
-	};
+	narrowItDown.getMatchedMenuItems = function(searchTerm) {
+	  MenuSearchService.getMatchedMenuItems(searchTerm).then(function(result) {
+	  	narrowItDown.found = result;
+	  });
+	}
 };
 
-AlreadyBoughtController.$inject = ['ShoppingListCheckOffService'];
-function AlreadyBoughtController (ShoppingListCheckOffService) {
-	var boughtItems = this;
-
-	boughtItems.items = ShoppingListCheckOffService.getBoughtItems();
-};
-
-function ShoppingListCheckOffService() {
+MenuSearchService.$inject = ['$http'];
+function MenuSearchService($http) {
 	var service = this;
 
-	var toBuyItems = [
-		{ name: "cookies", quantity: 10, pricePerItem: 1 },
-		{ name: "chips", quantity: 2, pricePerItem: 1.5 },
-		{ name: "coca cola", quantity: 5, pricePerItem: 1.25 },
-		{ name: "crackers", quantity: 9, pricePerItem: 0.5 },
-		{ name: "coffee", quantity: 1, pricePerItem: 3 }
-	];
-	var boughtItems = [];
-
-	service.buyItem = function(index) {
-		boughtItems.push(toBuyItems[index]);
-		toBuyItems.splice(index, 1);
-	}
-
-	service.getItemsToBuy = function() { 
-		return toBuyItems;
-	}
-
-	service.getBoughtItems = function() { 
-		return boughtItems;
-	}
-}
-
-AngularCurrencyFilter.$inject = ['$filter'];
-function AngularCurrencyFilter($filter) {
-  return function (value) {
-    value = value || 0;
-    value = "$$" + $filter('currency')(value)
-    return value;
-  }
+	service.getMatchedMenuItems = function(searchTerm) {
+	  return $http({
+	  	method: "GET",
+	  	url: ("https://davids-restaurant.herokuapp.com/menu_items.json")
+	  }).then(function (result) {
+    	console.log(result);
+    	var foundItems = result.data.menu_items.filter(r => r.description.includes(searchTerm));
+    	return foundItems;
+	  });
+	};
 }
 
 })();
