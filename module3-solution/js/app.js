@@ -32,16 +32,22 @@ function MenuSearchService($http) {
 	  	method: "GET",
 	  	url: ("https://davids-restaurant.herokuapp.com/menu_items.json")
 	  }).then(function (result) {
-    	console.log(result);
-    	var foundItems = result.data.menu_items.filter(r => 
+	  	if (!searchTerm) {
+	  		return [];
+	  	} else {
+    	  var foundItems = result.data.menu_items.filter(r => 
     		r.description.toLowerCase().includes(searchTerm.toLowerCase()));
-    	return foundItems;
+    	  return foundItems;
+    	}
+	  }).catch(function(error) {
+	  	return [];
 	  });
 	};
 }
 
 function FoundItemsDirective() {
 	var ddo = {
+		restrict: 'E',
 		templateUrl: 'foundItems.html',
 		scope: {
 		  foundItems: '<',
