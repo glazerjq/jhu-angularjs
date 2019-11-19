@@ -1,18 +1,13 @@
 (function() {
 'use strict';
 
-angular.module('data')
+angular.module('MenuApp')
 .controller('DataController', DataController);
 
-DataController.$inject = ['MenuDataService'];
-function DataController() {
+DataController.$inject = ['categories'];
+function DataController(categories) {
 	var $ctrl = this;
-
-	$ctrl.categories = MenuDataService.getAllCategories();
-
-	$ctrl.items = function(category) { 
-		MenuDataService.getItemsForCategory(category);
-	};
+	$ctrl.categories = categories;
 }	
 
 })();
