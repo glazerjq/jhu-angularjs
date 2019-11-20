@@ -1,7 +1,7 @@
 (function() {
 'use strict';
 
-angular.module('MenuApp')
+angular.module('MenuApp', ['ui.router', 'data'])
 .config(RoutesConfig);
 
 RoutesConfig.$inject = ['$stateProvider', '$urlRouterProvider'];
@@ -21,8 +21,8 @@ function RoutesConfig($stateProvider, $urlRouterProvider) {
 	// categories
 	.state('categories', {
 		url: '/categories',
-		templateUrl: 'src/data/templates/categories-list.template.html',
-		controller: 'DataController',
+		templateUrl: 'src/menuApp/templates/categories-main.template.html',
+		controller: 'DataController as dataCtrl',
 		resolve: {
 			categories: ['MenuDataService', function(MenuDataService) {
 				return MenuDataService.getAllCategories();
