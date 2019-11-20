@@ -28,13 +28,13 @@ function RoutesConfig($stateProvider, $urlRouterProvider) {
 				return MenuDataService.getAllCategories();
 			}]
 		}
-	});
+	})
 
 	// items
-	// .state('items', {
-	// 	url: '/items',
-	// 	templateUrl: 'src/data/templates/items.template.html'
-	// });
+	.state('items', {
+		url: '/items',
+		templateUrl: 'src/menuApp/templates/items.template.html'
+	});
 }
 
 })();
