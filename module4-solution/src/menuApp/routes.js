@@ -38,11 +38,9 @@ function RoutesConfig($stateProvider, $urlRouterProvider) {
     	resolve: {
       		items: ['$stateParams', 'MenuDataService',
             	function ($stateParams, MenuDataService) {
-              	return MenuDataService.getItemsForCategory()
-	                .then(function (items) {
-                  		return items[$stateParams.categoryName];
-                });
-            }]
+              		return MenuDataService.getItemsForCategory($stateParams.categoryName);
+	            }
+            ]
     	}
 	});
 }

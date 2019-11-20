@@ -20,13 +20,11 @@ function MenuDataService($http) {
 
 	// returns a promise using the following REST API endpoint: https://davids-restaurant.herokuapp.com/menu_items.json?category=<categoryShortName>.
 	service.getItemsForCategory = function(categoryShortName) {
-		console.log(categoryShortName);
 		return $http({
 			method: "GET",
 			url: ("https://davids-restaurant.herokuapp.com/menu_items.json"),
 			params: {"category": categoryShortName}
 		}).then(function (result) {
-			console.log(result);
 		  	return result.data;
 	  	});
 	}

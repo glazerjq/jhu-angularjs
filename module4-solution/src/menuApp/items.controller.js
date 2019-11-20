@@ -7,7 +7,7 @@ angular.module('MenuApp')
 ItemsController.$inject = ['items'];
 function ItemsController(items) {
 	var $ctrl = this;
-	$ctrl.items = items;
+	$ctrl.items = items.menu_items;
 }	
 
 })();
