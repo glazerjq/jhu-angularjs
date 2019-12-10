@@ -1,0 +1,14 @@
+<span ng-hide="myinfoCtrl.user">Not Signed Up Yet. <a ui-sref="public.signup">Sign up Now!</a></span>
+
+<div ng-if="myinfoCtrl.user">User Information
+	<ul>
+		<li>First Name: {{ myinfoCtrl.user.firstName }}</li>
+		<li>Last Name: {{ myinfoCtrl.user.lastName }}</li>
+		<li>Email: {{ myinfoCtrl.user.email }}</li>
+		<li>Phone Number: {{ myinfoCtrl.user.phone }}</li>
+		<li>Favorite Dish Short Name: {{ myinfoCtrl.user.favDish }}</li>
+		<li>Favorite Dish Name: {{ myinfoCtrl.user.name }}</li>
+		<li>Favorite Dish Description: {{ myinfoCtrl.user.description }}</li>
+		<li>Favorite Dish Image: <img ng-src="https://jglazer5.herokuapp.com/images/{{myinfoCtrl.user.favDish}}.jpg"}}"></li>
+	</ul>
+</div>

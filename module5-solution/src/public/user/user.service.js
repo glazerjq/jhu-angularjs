@@ -6,13 +6,14 @@ angular.module('common')
 
 function UserService() {
   var service = this;
+  service.user = "";
 
   service.setUser = function (user) {
     service.user = user;
   };
 
   service.getUser = function () {
-    return user;
+    return service.user;
   }
 
 }
