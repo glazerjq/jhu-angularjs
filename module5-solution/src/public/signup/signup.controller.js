@@ -6,11 +6,9 @@ angular.module('public')
 
 function SignupController() {
   var $ctrl = this;
-  
+
   $ctrl.submit = function() {
-  	console.log("HERE");
   	$ctrl.completed = true;
-  	//https://jglazer5.herokuapp.com/menu_items/A1.json
   }
 }
 
